@@ -119,7 +119,18 @@ The write-up holds the story, the index makes it findable, and the memory surfac
 
 ---
 
-## 8. Long-running work
+## 8. Parallel agents
+
+Independent work runs in parallel. Examples: sweeping 30 historical tickets against a new system, profiling several tenants' data, drafting docs while a fix is tested.
+
+- **One main session keeps the big picture.** It owns the plan, the status doc and the decisions. Sub-agents get a narrow, self-contained brief: goal, inputs, constraints, output format.
+- **Parallelise only what is independent.** No two agents write to the same files, branch or database at the same time.
+- **Sub-agents report, the main session decides.** Findings come back as structured summaries. Nothing a sub-agent produces is merged, posted or run against production without passing through the main session and me.
+- **Same rules apply.** Sub-agents read WORKFLOW.md too. Production stays read-only.
+
+---
+
+## 9. Long-running work
 
 For investigations or programs that span many sessions:
 
