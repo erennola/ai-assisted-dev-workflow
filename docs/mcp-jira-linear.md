@@ -25,7 +25,7 @@ Then, inside a Claude Code session, run `/mcp` and complete the OAuth flow in th
 | Task | Typical calls | Write? |
 |---|---|---|
 | Intake: read the ticket, comments, attachments list, linked issues | get issue, get comments | No |
-| Find prior art: "has this symptom been reported before?" | JQL search / Linear search by text, component, label | No |
+| **Precedents before conclusions** ([WORKFLOW §2.2](../WORKFLOW.md#22-precedents-before-conclusions)): "has this symptom, module or error been seen before, and what was the cause?" | JQL search / Linear search by text, component, label, customer, including closed tickets | No |
 | Cross-check a fix against a backlog of historical tickets | search, then read each | No |
 | Post a recap after a fix (finding, PR link, next step) | add comment | **Yes, when asked** |
 | File issues found during a test campaign | create issue | **Yes, after review** |

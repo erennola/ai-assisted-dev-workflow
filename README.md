@@ -13,6 +13,7 @@ The agent is a fast, tireless pair. I stay the engineer of record.
 - **I own decisions, the agent does the legwork.** It reads tickets, explores code, drafts queries, writes code and documents. I approve plans, run anything against production, push, deploy, and decide what a ticket's status is.
 - **Plan, then change.** Non-trivial work starts with a written plan and alternatives. No code change without agreement.
 - **Production is read-only for the agent.** It writes the SQL; I review and run it, then paste back the results. Local Docker databases are fair game.
+- **Check precedents before concluding.** The agent's first finding is a hypothesis. Before it goes back to anyone, search the ticket history for the same symptom. Someone may already know the cause or have the fix.
 - **Verify against data, not beliefs.** "It's the same bug again" is a hypothesis. Before-and-after queries prove a fix.
 - **Parallelise the independent, centralise the decisions.** Sub-agents take narrow, independent tasks. One main session keeps the plan and the big picture.
 - **Write it down.** Every ticket ends with an incident write-up and an index entry, so the next session (human or agent) starts from knowledge, not from chat history.
@@ -32,9 +33,9 @@ The agent is a fast, tireless pair. I stay the engineer of record.
 
 An illustrative example. The app, ticket and numbers are invented.
 
-1. **Intake.** I hand the agent `SUP-123: "Certificates not issued after course retake"`. It pulls the ticket through the Jira MCP and asks two clarifying questions.
+1. **Intake.** I hand the agent `SUP-123: "Certificates not issued after course retake"`. It pulls the ticket through the Jira MCP, asks two clarifying questions and searches the tracker for precedents. It finds one closed ticket from last year with the same symptom on another customer.
 2. **Diagnosis.** The agent reads the award code path and checks the schema in the repo (it never guesses column names), then gives me one batch of read-only queries. I run them on production and paste back the results.
-3. **Finding.** 14 users have a stale completion row from the previous period. The agent proposes two fixes: a data repair alone, or a data repair plus a guard in the reset job. It lists the trade-offs, and I pick the second.
+3. **Finding.** 14 users have a stale completion row from the previous period, the same mechanism as the old ticket, whose fix only covered a data repair. The agent proposes two fixes: a data repair alone, or a data repair plus a guard in the reset job. It lists the trade-offs, and I pick the second.
 4. **Change.** The agent creates a branch, writes the fix and a test, and reproduces the issue and the fix against a local copy of the data. An automated review pass runs before I open the PR.
 5. **Release.** I push, a teammate reviews, I deploy. Verification queries confirm the 14 users now hold certificates and no other rows changed.
 6. **Communication.** The agent drafts a Jira comment: finding, fix and PR link, in neutral wording, tagging only the person I named. I post it. The status change is left to the reporter.

@@ -24,7 +24,17 @@ This is the operating agreement between me (the engineer) and the agent. The age
 - The agent reads the ticket directly through MCP (see [`docs/mcp-jira-linear.md`](docs/mcp-jira-linear.md)), then the relevant docs from the knowledge base.
 - The agent asks questions until the problem is clear. Separate **what the reporter literally asked** from **what people believe is happening**. Beliefs often reach us verbally and are often wrong.
 
-### 2.2 Database access
+### 2.2 Precedents before conclusions
+Before any diagnosis goes back to the reporter, search the ticket history for the same symptom, module, customer or error text. The agent's first finding is a hypothesis. The tracker is the team's memory, and that history is how you check the hypothesis.
+
+- **Search wide, then read close.** Search by symptom wording, module, customer and error message, including closed and won't-fix tickets. Read the matches that look relevant, comments included.
+- **Use what you find to confirm or correct.** A precedent can confirm the cause, hand you a fix someone already proved, show that a "new" bug is a known regression from a specific deploy, or contradict the first hypothesis outright.
+- **Cite precedents in the answer and in the write-up.** "Same pattern as TICKET-123, resolved the same way" saves the next person the search. A precedent table in the incident doc turns isolated tickets into a known pattern.
+- **Correct old conclusions when new evidence says so.** If an earlier ticket's conclusion turns out to be wrong, note it on both write-ups.
+
+This matters most in an unfamiliar codebase. On joining a product I didn't know, most of the "unsolvable" tickets in the backlog turned out to have a precedent with the cause or the fix already in it.
+
+### 2.3 Database access
 **Production and staging:**
 - The agent writes SQL. I review it, run it, and paste the results back.
 - **Read before write.** Diagnose with `SELECT`s. Any write is a reviewed script that shows the rows it will touch before touching them, runs inside a transaction, and ends with a verification query.
@@ -35,23 +45,23 @@ This is the operating agreement between me (the engineer) and the agent. The age
 - The agent may run queries and changes directly, saying what it is about to run before it runs it.
 - Prefer a local copy of real (sanitised) data to reproduce production issues.
 
-### 2.3 Planning
+### 2.4 Planning
 - Anything beyond a trivial fix starts with a plan: what changes, where, why, and how we'll know it worked.
 - Present **alternatives with trade-offs**, not a single answer.
 - **No code changes without agreement.** That applies twice over in shared code that every customer or tenant runs.
 
-### 2.4 Development
+### 2.5 Development
 - Work on a branch named `<TICKET>-<short-description>`.
 - The agent commits. Commit messages are in English and explain the *why*.
 - The agent does **not** push. I push.
 - PR descriptions cover the summary, root cause, the change, how it was tested, and the risk and blast radius.
 
-### 2.5 Review
+### 2.6 Review
 - For non-trivial changes, run an **automated review pass before human review**. Fold real findings into a `review:` commit and discard nits. Human reviewers should spend their time on judgment, not lint.
 - The agent triages review feedback: what's worth fixing vs. what's over-engineering, with a reason for each.
 - Fixes land as new commits on the same branch.
 
-### 2.6 Testing and verification
+### 2.7 Testing and verification
 - Reproduce locally first, then fix, then show the fix with the same reproduction.
 - Run the **same verification queries before and after** a data fix, and report counts.
 - Staging before production when the change allows it.
@@ -97,6 +107,7 @@ When in doubt, leave it out. Removing text before posting is cheaper than redact
 
 ## 6. Change checklist
 
+- [ ] Ticket history searched for precedents, and matches cited
 - [ ] Approach agreed before implementation
 - [ ] Code, comments and commits in English
 - [ ] Reproduced and fixed locally, with the same reproduction

@@ -18,6 +18,11 @@ What the reporter saw, in their terms. Note separately any belief that isn't in 
 ## Root cause
 The mechanism, with the code path (`path/to/File.php::method`) and the data that proves it.
 
+## Precedents
+| Ticket | Same pattern? | Outcome |
+|---|---|---|
+| <KEY> | <how it matches or differs> | <cause / fix> |
+
 ## Fix
 - Code: what changed and why this approach (and which alternatives were rejected).
 - Data: the repair script, rows touched, transaction and verification.
