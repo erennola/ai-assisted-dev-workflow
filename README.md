@@ -2,7 +2,7 @@
 
 How I work with AI coding agents (Claude Code, Cursor) on production systems: a written workflow, an example `CLAUDE.md`, MCP integrations (Jira, Linear, Confluence, Git), parallel agents, and the knowledge-base structure that keeps long-running work recoverable across sessions.
 
-I'm **Ezequiel Rénnola**, a Senior Full Stack Engineer (PHP · React · AWS) based in Buenos Aires. Since 2023 I've used this process day to day on a multi-tenant SaaS platform: production support, data fixes, a legacy-to-Laravel rebuild and security work. This repo is the generic, client-free version of it. Nothing here comes from an employer codebase.
+I'm **[Ezequiel Rénnola](https://www.linkedin.com/in/ezequiel-rennola/)**, a Senior Full Stack Engineer (PHP · React · AWS) based in Buenos Aires. Since 2023 I've used this process day to day on a multi-tenant SaaS platform: production support, data fixes, a legacy-to-Laravel rebuild and security work. This repo is the generic, client-free version of it. Nothing here comes from an employer codebase.
 
 **What it changed in practice:** recurring production bugs on a legacy platform became rare once each fix came with a root-cause write-up and a rule the agent reads every session. On joining a second product, I cleared dozens of abandoned support tickets in my first week.
 
@@ -47,6 +47,10 @@ Agents are only as good as the context they start with. Long investigations outl
 - a new session gets up to speed in minutes by reading two or three short docs, not a 100-message history;
 - the same mistake (guessed column names, an unreviewed production write, an over-eager ticket transition) gets fixed once, in the rules, instead of every week;
 - teammates can read the same docs the agent reads.
+
+## Contact
+
+[LinkedIn](https://www.linkedin.com/in/ezequiel-rennola/). Open to remote senior full stack roles (US, Canada, LATAM).
 
 ## License
 

@@ -75,7 +75,7 @@ ON DUPLICATE KEY UPDATE state = new.state, updated_at = new.updated_at;
 
 - Foreign keys and indexes restored. Results compared against a restored 5.7 backup before deploying.
 - Upsert deployed to every code path using the old pattern. Failures went from 5 the day before to **0** after deploy.
-- A backfill script for the affected completions, run off-hours with before/after counts.
+- Backfill: the sync was re-run for the ~600 affected completions off-hours, with before/after counts, and affected learners received their pending certificates.
 - Follow-ups: error handling and logging around the sync write, and a check for the same pattern in other tenants' history.
 
 ## What the workflow contributed
